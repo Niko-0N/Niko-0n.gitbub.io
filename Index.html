@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Para mi amor 💖</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #ffe4fa 60%, #ffd6ec 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Trebuchet MS', sans-serif;
+            overflow: hidden;
+        }
+        #yes-btn, #no-btn {
+            margin: 30px 18px 0 18px;
+            padding: 20px 48px;
+            font-size: 1.7rem;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px #ffb6e688;
+            transition: background 0.2s, transform 0.2s, font-size 0.2s;
+        }
+        #yes-btn {
+            background: #7fff7f;
+            color: #106910;
+        }
+        #yes-btn:hover {
+            background: #00e600;
+            color: #fff;
+            transform: scale(1.07);
+        }
+        #no-btn {
+            background: #ffb6b6;
+            color: #b30000;
+        }
+        #no-btn:hover {
+            background: #ff3333;
+            color: #fff;
+            transform: scale(1.07);
+        }
+        #main-content {
+            display: none;
+            margin-top: 60px;
+            color: #b30059;
+        }
+        .love-message {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .heart {
+            position: fixed;
+            bottom: -40px;
+            font-size: 2.2rem;
+            color: #ff69b4;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+        }
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh) scale(1.3) rotate(20deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <audio id="audio-love" src="BLUE.mp3"></audio>
+    <div id="welcome">
+        <h1 style="color:#b30059; margin-top:80px;">Holaaaa my lady💗</h1>
+        <p style="font-size:1.3rem; color:#b30059;">¿Lista para una sorpresa?</p>
+        <button id="yes-btn">Sí 💘</button>
+        <button id="no-btn">No 💔</button>
+    </div>
+    <div id="main-content">
+        <div class="love-message" id="love-message">
+            My life te amoooo te amo muchisimo demasiado me haces tan bien y tan pero tan feliz que parece ireal, y es la primera vez (lo digo con certeza) que me da tanta felicidad que parece que voy a reventar pero amo eso, eres tanto car pero tanto que pareces una galaxia y esa galaxia es la que yo necesito, siento que con un te amo no demuestro lo mucho que te adoro, te aprecio, te quiero y lo muy muy especial que eres para mi... eres mas que un deseo... eres mas que perfecta... y yo te elijo a vos no a cualquier otra te elijo A TI elijo amarte, elijo apoyarte, elijo estar con vos en las buenas, en las malas y en las malisismas pero estare con vos... junto a ti la vida se ve de un color brillante y no gris como la suelo ver... Te amo... <br>mi noviecita hermosa<3 <br>
+            
+        </div>
+        <marquee style="font-size:1.5rem; color:#ff69b4; margin-top:30px;"><center>
+         "No importa cuanto tiempo tengas de vida si no en como lo utilizas" <br>yo elijo utilizar cada minuto y cada segundo hasta milisegundo de mi vida amandote... abrazandote y estando con vos... y solo con vos my lady...
+        </center></marquee>
+    </div>
+    <script>
+        // Música y mostrar contenido
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const audio = document.getElementById('audio-love');
+        const welcome = document.getElementById('welcome');
+        const mainContent = document.getElementById('main-content');
+        let yesFontSize = 1.7;
+
+        yesBtn.addEventListener('click', function() {
+            audio.play();
+            welcome.style.display = 'none';
+            mainContent.style.display = 'block';
+        });
+
+        noBtn.addEventListener('click', function() {
+            yesFontSize += 0.5;
+            yesBtn.style.fontSize = yesFontSize + 'rem';
+            yesBtn.style.padding = (20 + yesFontSize * 5) + 'px ' + (48 + yesFontSize * 10) + 'px';
+        });
+
+        // Lista de imágenes flotantes (pon aquí los nombres de tus imágenes de la carpeta)
+        const floatingImages = [
+            "foto1.jpg",
+            "foto2.jpg",
+            "foto3.jpg",
+            "foto4.jpg",
+"foto5.jpg",
+"foto6.jpg",
+"foto7.jpg",
+"foto8.jpg",
+"foto9.jpg",
+"foto10.jpg",
+"foto11.jpg",
+"foto12.jpg",
+"foto13.jpg",
+"foto14.jpg",
+"foto15.jpg",
+"foto16.jpg",
+"foto17.jpg",     
+"foto18.jpg",
+"foto19.jpg",
+"foto20.jpg",
+"foto21.jpg",
+"foto22.jpg",
+"foto23.jpg",
+"foto24.jpg",
+            // Agrega más nombres de archivos si quieres
+        ];
+
+        // Corazones flotantes y, a veces, imágenes flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💓';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (1.5 + Math.random() * 2.5) + 'rem';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+
+            // 30% de probabilidad de crear una imagen flotante
+            if (Math.random() < 0.3 && floatingImages.length > 0) {
+                createFloatingImage();
+            }
+        }
+
+        function createFloatingImage() {
+            const img = document.createElement('img');
+            img.src = floatingImages[Math.floor(Math.random() * floatingImages.length)];
+            img.style.position = 'fixed';
+            img.style.bottom = '-80px';
+            img.style.left = Math.random() * 100 + 'vw';
+            img.style.width = (60 + Math.random() * 60) + 'px';
+            img.style.height = 'auto';
+            img.style.opacity = 0.85;
+            img.style.pointerEvents = 'none';
+            img.style.borderRadius = '18px';
+            img.style.boxShadow = '0 4px 24px #ffb6e688';
+            img.style.animation = 'floatImgUp 5s linear forwards';
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 5000);
+        }
+
+        // Animación para las imágenes flotantes
+        const style = document.createElement('style');
+        style.innerHTML = `
+        @keyframes floatImgUp {
+            to {
+                transform: translateY(-110vh) scale(1.1) rotate(12deg);
+                opacity: 0;
+            }
+        }`;
+        document.head.appendChild(style);
+
+        setInterval(createHeart, 500);
+    </script>
+    </center></body>
+</html>
