@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>My Reader fav</title>
+    <style>
+        body {
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .heart {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 3s linear forwards;
+        }
+        .heart svg {
+            width: 100%;
+            height: 100%;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateX(-50%) scale(1) translateY(0);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) scale(1.2) translateY(-90vh);
+                opacity: 0;
+            }
+        }
+        .center-img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .center-img img {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+        }
+        .center-img .caption {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #e63946;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+            text-shadow: 1px 1px 8px #fff, 0 2px 8px #e63946;
+        }
+    </style>
+</head>
+<body>
+    <div id="heartIntro" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;z-index:10;flex-direction:column;">
+        <div id="bigHeart" style="width:120px;height:120px;transition:all 0.25s cubic-bezier(.68,-0.55,.27,1.55);cursor:pointer;user-select:none;">
+            <svg viewBox="0 0 32 29.6" style="width:100%;height:100%;">
+                <path id="heartPath" fill="#e63946" d="M23.6,0c-2.6,0-5,1.3-6.6,3.3C15.4,1.3,13,0,10.4,0C4.7,0,0,4.7,0,10.4c0,11.1,16,19.2,16,19.2s16-8.1,16-19.2C32,4.7,27.3,0,23.6,0z"/>
+            </svg>
+        </div>
+        <div style="margin-top:24px;font-size:1.2rem;color:#e63946;font-family:'Segoe UI',Arial,sans-serif;">Abre mi corazon My lady ♥</div>
+    </div>
+    <div class="center-img" id="mainContent" style="display:none;">
+        <img id="mainImage" src="https://i.imgur.com/1Q9Z1Zm.jpg" alt="Imagen especial" />
+        <div class="caption">Te amo, te quiero y te adoro my lectora compulsiva</div>
+    </div>
+    <script>
+        // --- Intro Heart Logic ---
+        const heartIntro = document.getElementById('heartIntro');
+        const bigHeart = document.getElementById('bigHeart');
+        let heartScale = 1;
+        let heartClicks = 0;
+        let exploded = false;
+        bigHeart.addEventListener('click', function() {
+            if (exploded) return;
+            heartClicks++;
+            heartScale += 0.25;
+            bigHeart.style.transform = `scale(${heartScale})`;
+            if (heartScale >= 8) {
+                exploded = true;
+                // Explosión visual
+                bigHeart.style.transition = 'all 0.4s cubic-bezier(.68,-0.55,.27,1.55)';
+                bigHeart.style.transform = 'scale(30) rotate(720deg)';
+                setTimeout(() => {
+                    heartIntro.style.transition = 'opacity 0.5s';
+                    heartIntro.style.opacity = 0;
+                    setTimeout(() => {
+                        heartIntro.style.display = 'none';
+                        document.getElementById('mainContent').style.display = 'flex';
+                        startHeartsAndImages();
+                    }, 500);
+                }, 400);
+            }
+        });
+
+        // --- Main Content Logic (corazones animados e imágenes) ---
+        function startHeartsAndImages() {
+            // Lista de URLs de imágenes (puedes cambiar o agregar más)
+            const images = [
+                'Car1.jpg',
+                'Car2.jpg',
+                'Car3.jpg',
+                'Car4.jpg',
+                'Car5.jpg'
+            ];
+            let current = 0;
+            const mainImage = document.getElementById('mainImage');
+            setInterval(() => {
+                current = (current + 1) % images.length;
+                mainImage.src = images[current];
+            }, 2500);
+
+            // Función para crear corazones animados
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                // SVG de corazón
+                heart.innerHTML = `<svg viewBox="0 0 32 29.6"><path fill="#e63946" d="M23.6,0c-2.6,0-5,1.3-6.6,3.3C15.4,1.3,13,0,10.4,0C4.7,0,0,4.7,0,10.4c0,11.1,16,19.2,16,19.2s16-8.1,16-19.2C32,4.7,27.3,0,23.6,0z"/></svg>`;
+                // Posición horizontal aleatoria
+                heart.style.left = (10 + Math.random() * 80) + 'vw';
+                heart.style.width = (20 + Math.random() * 20) + 'px';
+                heart.style.height = heart.style.width;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+            setInterval(createHeart, 300);
+        }
+        // No mostrar nada más hasta que explote el corazón
+    </script>
+</body>
+</html>
